@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Daily Calorie Intake Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+  <style>
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 100px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #ffc8a5;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    p {
+      text-align: left;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo"><img src="{{ url_for('static', filename='fitlog logo.png') }}" alt="FitLog Pro Logo"></a>
+    <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/exercise">Exercise Library</a></li>
+          <li><a href="/calories">Daily Calorie Intake Calculator</a></li>
+          <li><a href="/bmi">BMI Calculator</a></li>
+          <li><a href="/community">Community</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/logout" class="btn">Logout</a></li>
+      </ul>
+    </nav>
+
+  <div class="calculator">
+    <h1>Daily Calorie Intake Calculator</h1>
+    <form id="calculator-form">
+      <label for="age">Age (years):</label>
+      <input type="number" id="age" required><br>
+
+      <label for="sex">Sex:</label>
+      <input type="radio" id="male" name="sex" value="male" required>
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="sex" value="female" required>
+      <label for="female">Female</label><br>
+
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" required><br>
+
+      <label for="activity">Activity Level:</label>
+      <select id="activity" required>
+        <option value="sedentary">Sedentary (little or no exercise)</option>
+        <option value="lightlyActive">Lightly Active (light exercise or sports 1-3 days a week)</option>
+        <option value="moderatelyActive">Moderately Active (moderate exercise or sports 3-5 days a week)</option>
+        <option value="veryActive">Very Active (hard exercise or sports 6-7 days a week)</option>
+        <option value="superActive">Super Active (very hard exercise, physical job, or training twice a day)</option>
+      </select><br>
+
+      <button type="button" id="calculate-button">Calculate</button>
+    </form>
+
+    <div id="results" style="display: none;">
+      <h2>Calculated Daily Requirements</h2>
+      <p>Daily Calorie Intake: <span id="calories"></span> calories</p>
+      <p>Protein Intake: <span id="protein"></span> grams</p>
+      <p>Carbohydrate Intake: <span id="carbs"></span> grams</p>
+      <p>Fat Intake: <span id="fat"></span> grams</p>
+    </div>
+  </div>
+
+  <script>
+    const calculateButton = document.getElementById("calculate-button");
+    const resultsDiv = document.getElementById("results");
+
+    calculateButton.addEventListener("click", function () {
+      const age = parseInt(document.getElementById("age").value);
+      const sex = document.querySelector('input[name="sex"]:checked').value;
+      const weight = parseFloat(document.getElementById("weight").value);
+      const activity = document.getElementById("activity").value;
+
+      let bmr;
+      if (sex === "male") {
+        bmr = 88.362 + (13.397 * weight) + (4.799 * age) - (5.677 * age);
+      } else {
+        bmr = 447.593 + (9.247 * weight) + (3.098 * age) - (4.330 * age);
+      }
+
+      let activityFactor;
+      switch (activity) {
+        case "sedentary":
+          activityFactor = 1.2;
+          break;
+        case "lightlyActive":
+          activityFactor = 1.375;
+          break;
+        case "moderatelyActive":
+          activityFactor = 1.55;
+          break;
+        case "veryActive":
+          activityFactor = 1.725;
+          break;
+        case "superActive":
+          activityFactor = 1.9;
+          break;
+      }
+
+      const calories = Math.round(bmr * activityFactor);
+      const protein = Math.round(weight * 2.2); // 2.2 grams of protein per kg
+      const carbs = Math.round((calories * 0.5) / 4); // 50% of calories from carbs
+      const fat = Math.round((calories * 0.3) / 9); // 30% of calories from fat
+
+      document.getElementById("calories").textContent = calories;
+      document.getElementById("protein").textContent = protein;
+      document.getElementById("carbs").textContent = carbs;
+      document.getElementById("fat").textContent = fat;
+
+      resultsDiv.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>

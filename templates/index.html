@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FitLog Pro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo"><img src="{{ url_for('static', filename='fitlog logo.png') }}" alt="FitLog Pro Logo"></a>
+  <ul>
+    <li><a href="/login" class="btn">Login</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="content">
+    <div class="title">Welcome to FitLog Pro</div>
+    <br>
+    <div class="title">Your Ultimate Fitness Companion!</div>
+  </div>
+
+  <div class="flex-container">
+    <div class="text">
+      <h1><b>Transform your fitness journey with FitLog Pro.</b></h1>
+      <p>Ready to achieve your goals? Monitor workouts, understand your progress, and reach new heights with FitLog Pro!</p>
+      <br>
+      <a href="/signup" class="btn">Get Started</a>
+      <br>
+    </div>
+    <div class="image">
+      <img src="{{ url_for('static', filename='1food.png') }}" alt="image">
+    </div>
+  </div>
+  <div class="flex-container reverse">
+    <div class="image">
+      <img src="{{ url_for('static', filename='1fitness.png') }}" alt="image" width="300">
+    </div>
+    <div class="text">
+      <h1><b>Discover our extensive training resources.</b></h1>
+      <p>Gain valuable knowledge about workout routines, exercise variations, and training insights to understand the impact of your fitness regimen.</p>
+      <p>FitLog Pro is here to empower your fitness journey with personalized training guidance and support.</p>
+    </div>
+  </div>
+  <div class="center-align">
+    <h1>Empowering Your FitLog Pro Journey</h1>
+    <p>Whether you're aiming for weight loss, toning, improved BMI, or overall well-being, FitLog Pro equips you with the perfect tools to make progress.</p>
+  </div>
+
+  <div class="my-flex-container">
+    <div class="my-box">
+      <div class="my-box-content">
+        <h2 class="MuiTypography-root MuiTypography-Heading/Bold/MD MuiTypography-gutterBottom css-n7fm7l">Discover. Learn. Progress.</h2>
+        <h3 class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-ocmo5t">Exploring our Exercise Library provides valuable insights into your routines and enhances your chances of achieving your fitness milestones with FitLog Pro.</h3>
+        <div class="my-image">
+          <img src="{{ url_for('static', filename='1bicep.png') }}" alt="Image1">
+        </div>
+      </div>
+    </div>
+
+    <div class="my-box">
+      <div class="my-box-content">
+        <h2 class="MuiTypography-root MuiTypography-Heading/Bold/MD MuiTypography-gutterBottom css-n7fm7l">Unlock Your Fitness Potential.</h2>
+        <h3 class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-ocmo5t">Access our Health Calculators, Exercise Library, and engage with our vibrant community, all designed to elevate your fitness journey.</h3>
+        <div class="my-image">
+          <img src="{{ url_for('static', filename='1running.png') }}" alt="Image2">
+        </div>
+      </div>
+    </div>
+
+    <div class="my-box">
+      <div class="my-box-content">
+        <h2 class="MuiTypography-root MuiTypography-Heading/Bold/MD MuiTypography-gutterBottom css-n7fm7l">Join Our Thriving Fitness Community.</h2>
+        <h3 class="MuiTypography-root MuiTypography-body1 MuiTypography-paragraph css-ocmo5t">Connect, share, and learn with fitness enthusiasts from around the world.</h3>
+        <div class="my-image">
+          <img src="{{ url_for('static', filename='1community.png') }}" alt="Image3">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer class="footer">
+  <p><b><i>FitLog Pro - A project crafted by Andrei Isak. Copyright © 2023.</i></b></p>
+</footer>
+</body>
+</html>

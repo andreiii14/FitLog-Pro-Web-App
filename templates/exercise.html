@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FitLog Pro - Exercise Library</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+  <style>
+    .exercise-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo"><img src="{{ url_for('static', filename='fitlog logo.png') }}" alt="FitLog Pro Logo"></a>
+    <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/exercise">Exercise Library</a></li>
+          <li><a href="/calories">Daily Calorie Intake Calculator</a></li>
+          <li><a href="/bmi">BMI Calculator</a></li>
+          <li><a href="/community">Community</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/logout" class="btn">Logout</a></li>
+      </ul>
+    </nav>
+
+
+<div class="exercise-container">
+  <h1>Exercise Library</h1>
+  <label for="bodyPart">Select Body Part:</label>
+  <select id="bodyPart">
+    <option value="select" disabled selected>Select</option>
+    <option value="Chest">Chest</option>
+    <option value="Back">Back</option>
+    <option value="Legs">Legs</option>
+    <option value="Arms">Arms</option>
+    <option value="Shoulders">Shoulders</option>
+    <option value="Abs">Abs</option>
+  </select>
+  <div id="exerciseList">
+  </div>
+</div>
+<script>
+  const bodyPartDropdown = document.getElementById("bodyPart");
+  const exerciseListContainer = document.getElementById("exerciseList");
+  const exercises = {
+    Chest: {
+      Upper: ["Incline Bench Press", "Incline Dumbbell Press", "Chest Flyes"],
+      Lower: ["Flat Bench Press", "Push-Ups", "Decline Bench Press"],
+    },
+    Back: {
+      Upper: ["Pull-Ups", "Chin-Ups", "Lat Pulldowns"],
+      Lower: ["Deadlifts", "Bent-Over Rows", "T-Bar Rows"],
+    },
+    Legs: {
+      Quads: ["Squats", "Leg Press", "Hack Squats"],
+      Hamstrings: ["Deadlifts", "Leg Curls", "Good Mornings"],
+      Calves: ["Standing Calf Raises", "Seated Calf Raises", "Donkey Calf Raises"],
+    },
+    Arms: {
+      Biceps: ["Bicep Curls", "Hammer Curls", "Preacher Curls"],
+      Triceps: ["Tricep Dips", "Skull Crushers", "Tricep Pushdowns"],
+    },
+    Shoulders: {
+      "Front Delts": ["Front Raises", "Military Press", "Arnold Press"],
+      "Lateral Delts": ["Lateral Raises", "Dumbbell Shrugs", "Upright Rows"],
+      "Rear Delts": ["Face Pulls", "Rear Delt Raises", "Bent-Over Flyes"],
+    },
+    Abs: {
+      Abs: ["Crunches", "Leg Raises", "Planks", "Russian Twists"],
+    }
+  };
+  function updateExerciseList() {
+    const selectedBodyPart = bodyPartDropdown.value;
+    if (selectedBodyPart === 'select') {
+      exerciseListContainer.innerHTML = ''; // Clear the exercise list
+      return;
+    }
+    const exercisesForBodyPart = exercises[selectedBodyPart] || {};
+
+    const exerciseList = document.createElement("ul");
+    for (const key in exercisesForBodyPart) {
+      const exerciseCategory = exercisesForBodyPart[key];
+      const categoryTitle = document.createElement("li");
+      categoryTitle.innerHTML = `<b>${key}</b>`;
+      exerciseList.appendChild(categoryTitle);
+      exerciseCategory.forEach(exercise => {
+        const exerciseItem = document.createElement("li");
+        exerciseItem.textContent = exercise;
+        exerciseList.appendChild(exerciseItem);
+      });
+    }
+
+    exerciseListContainer.innerHTML = "";
+    exerciseListContainer.appendChild(exerciseList);
+  }
+  bodyPartDropdown.addEventListener("change", updateExerciseList);
+  updateExerciseList();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact Us - FitLog Pro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+  <style>
+    .contact-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    button[type="submit"] {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="logo"><img src="{{ url_for('static', filename='fitlog logo.png') }}" alt="FitLog Pro Logo"></a>
+    <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/exercise">Exercise Library</a></li>
+          <li><a href="/calories">Daily Calorie Intake Calculator</a></li>
+          <li><a href="/bmi">BMI Calculator</a></li>
+          <li><a href="/community">Community</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/logout" class="btn">Logout</a></li>
+      </ul>
+    </nav>
+
+  <div class="content">
+    <h2>Contact <span>Us</span> below!</h2>
+    <div class="contact-container">
+      <form id="contactForm">
+        <table>
+          <tr>
+            <td>First Name:</td>
+            <td><input type="text" name="first name" required></td>
+          </tr>
+          <tr>
+            <td>Last Name:</td>
+            <td><input type="text" name="last name" required></td>
+          </tr>
+          <tr>
+            <td>Number:</td>
+            <td><input type="tel" name="number" required></td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td><input type="email" name="email" required></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td><textarea name="description" rows="8" required></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center;">
+              <button type="submit" class="btn">Submit</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(event){
+      event.preventDefault();
+      window.location.href = "/home";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+  <style>
+
+        .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        p {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo"><img src="{{ url_for('static', filename='fitlog logo.png') }}" alt="FitLog Pro Logo"></a>
+        <ul>
+              <li><a href="/home">Home</a></li>
+              <li><a href="/exercise">Exercise Library</a></li>
+              <li><a href="/calories">Daily Calorie Intake Calculator</a></li>
+              <li><a href="/bmi">BMI Calculator</a></li>
+              <li><a href="/community">Community</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/logout" class="btn">Logout</a></li>
+          </ul>
+        </nav>
+
+    <div class="calculator">
+        <h1>BMI Calculator</h1>
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" placeholder="Enter height" required>
+        <br><br>
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter weight" required>
+        <br><br>
+        <button id="calculate" style="background-color: #ffc8a5";>Calculate BMI</button>
+        <p id="result"></p>
+        <p id="category"></p>
+        <p id="recommendation"></p>
+        <p><strong>How BMI Works:</strong></p>
+        <p>
+            BMI is a measure of body fat based on height and weight. It is calculated as:
+        </p>
+        <p>
+            BMI = (Weight in kg) / [(Height in meters) x (Height in meters)]
+        </p>
+        <p>
+            The result is classified into categories such as underweight, normal weight, overweight, and obese.
+        </p>
+    </div>
+    <script>
+        document.getElementById("calculate").addEventListener("click", function() {
+            const height = parseFloat(document.getElementById("height").value);
+            const weight = parseFloat(document.getElementById("weight").value);
+
+            if (!isNaN(height) && !isNaN(weight) && height > 0 && weight > 0) {
+                const bmi = weight / ((height / 100) ** 2);
+                document.getElementById("result").textContent = `Your BMI: ${bmi.toFixed(2)}`;
+                let category, recommendation;
+                if (bmi < 18.5) {
+                    category = "Underweight";
+                    recommendation = "Consider consulting a healthcare professional.";
+                } else if (bmi < 24.9) {
+                    category = "Normal Weight";
+                    recommendation = "Maintain a balanced diet and regular exercise.";
+                } else if (bmi < 29.9) {
+                    category = "Overweight";
+                    recommendation = "Consider losing weight through diet and exercise.";
+                } else {
+                    category = "Obese";
+                    recommendation = "Consult a healthcare professional for weight management.";
+                }
+
+                document.getElementById("category").textContent = `Category: ${category}`;
+                document.getElementById("recommendation").textContent = `Recommendation: ${recommendation}`;
+            } else {
+                alert("Please enter valid height and weight.");
+            }
+        });
+    </script>
+</body>
+</html>
